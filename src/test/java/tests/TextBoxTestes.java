@@ -1,24 +1,16 @@
 package tests;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.*;
+
 import com.codeborne.selenide.Configuration;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
 
 
-public class TextBoxTestes {
-    @BeforeAll
-    static void setUp() {
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1920x1080";
-        // Configuration.pageLoadStrategy = "eager";
-        Configuration.baseUrl = "https://demoqa.com/";
-        //Configuration.timeout = 10000;
-    }
+public class TextBoxTestes extends TestBase {
 
     @Test
     void checkPracticeFormTest() {
