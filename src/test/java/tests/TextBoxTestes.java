@@ -36,9 +36,9 @@ public class TextBoxTestes {
        $("[id=permanentAddress]").setValue("second address 2");
        $("[id=submit]").click();
 
-       $("[id=output [id=name]").shouldHave(text("Alex Black"));
-       $("[id=output [id=userEmail]").shouldHave(text("alex@black.com"));
-       $("[id=output [id=currentAddress]").shouldHave(text("first address 1"));
-       $("[id=output [id=permanentAddress]").shouldHave(text("second address 2"));
+       $("[id=output] [id=name]").shouldHave(text("Alex Black"));
+       $("[id=output] [id=email]").shouldHave(text("alex@black.com"));
+       $("[id=output] [id=currentAddress]").shouldHave(text("first address 1"));
+       $("[id=output] [id=permanentAddress]").shouldHave(text("second address 2"));
     }
 }
