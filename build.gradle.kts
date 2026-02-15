@@ -1,5 +1,5 @@
 plugins {
-    id("java")
+    id("java-library")
 }
 
 group = "com.jiharpv"
@@ -10,10 +10,16 @@ repositories {
 }
 
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    dependencies {
+        testImplementation(platform("org.junit:junit-bom:5.10.0"))
+        testImplementation("org.junit.jupiter:junit-jupiter")
+        testImplementation("com.codeborne:selenide:7.14.0")
+    }
 }
 
 tasks.test {
     useJUnitPlatform()
 }
+
+
+
