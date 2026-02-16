@@ -1,13 +1,9 @@
 package tests;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
-
-import com.codeborne.selenide.Configuration;
 
 
 public class TextBoxTestes extends TestBase {
@@ -23,9 +19,9 @@ public class TextBoxTestes extends TestBase {
     void successfulFillFormTest() {
        //open("https://demoqa.com");
        $("[id=userName]").setValue("Alex Black");
-       $("[id=userEmail]").setValue("alex@black.com");
-       $("[id=currentAddress]").setValue("first address 1");
-       $("[id=permanentAddress]").setValue("second address 2");
+       //$("[id=userEmail]").setValue("alex@black.com");
+       //$("[id=currentAddress]").setValue("first address 1");
+       //$("[id=permanentAddress]").setValue("second address 2");
        $("[id=submit]").click();
 
        $("[id=output] [id=name]").shouldHave(text("Alex Black"));
