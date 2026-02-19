@@ -1,13 +1,23 @@
 package tests;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class HomeWorkTests extends TestBase {
+public class HomeWorkTests {
+    @BeforeAll
+    static void setUp() {
+        Configuration.browser = "chrome";
+        Configuration.browserSize = "1920x1080";
+        // Configuration.pageLoadStrategy = "eager";
+        Configuration.baseUrl = "https://demoqa.com/";
+        Configuration.timeout = 10000;
+    }
 
     @Test
     void checkPracticeFormTest() {
