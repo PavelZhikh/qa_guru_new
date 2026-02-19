@@ -33,7 +33,7 @@ public class HomeWorkTests {
 
         $("#userEmail").setValue("petrIvanov@mail.ru");
 
-        $("input[name='gender'][value='Male']").click();
+        $("#genterWrapper").$(byText("Male")).click();;
 
         $("#userNumber").setValue("0123456789");
 
