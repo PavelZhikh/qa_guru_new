@@ -1,33 +1,21 @@
 package tests;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class HomeWorkTests {
-    @BeforeAll
-    static void setUp() {
-        Configuration.browser = "chrome";
-        Configuration.browserSize = "1920x1080";
-        // Configuration.pageLoadStrategy = "eager";
-        Configuration.baseUrl = "https://demoqa.com/";
-        Configuration.timeout = 10000;
-    }
-
-    @Test
-    void checkPracticeFormTest() {
-        open("");
-        $$(".card-body").findBy(text("Forms")).click();
-        $$(".router-link").findBy(text("Practice Form")).click();
-    }
+public class HomeWorkTests extends TestBase {
 
     @Test
     void successfulFillFormTest() {
+
+        open("");
+        $$(".card-body").findBy(text("Forms")).click();
+        $$(".router-link").findBy(text("Practice Form")).click();
+
         $("#firstName").setValue("Petr");
         $("#lastName").setValue("Ivanov");
 
@@ -38,11 +26,9 @@ public class HomeWorkTests {
         $("#userNumber").setValue("0123456789");
 
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__year-select").click();
-        $("option[value='1995']").click();
-        $(".react-datepicker__month-select").click();
-        $("option[value='5']").click();
-        $(".react-datepicker__day.react-datepicker__day--011").click();
+        $(".react-datepicker__month-select").$(byText("May")).click();
+        $(".react-datepicker__year-select").$(byText("1990")).click();
+        $(".react-datepicker__day--010:not(.react-datepicker__day--outside-month)").click();
 
 
         $("#subjectsInput").setValue("Arts").pressEnter();
@@ -56,7 +42,7 @@ public class HomeWorkTests {
         $("#state").shouldBe(Condition.visible).click();
         $("#state").$(byText("Haryana")).shouldBe(Condition.visible).click();
         $("#city").click();
-        $("#city").$(byText("Panipat")).click();
+        $("#city").$(byText("Karnal")).shouldBe(Condition.visible).click();
 
         $("#submit").click();
 
@@ -66,11 +52,11 @@ public class HomeWorkTests {
         $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("petrIvanov@mail.ru"));
         $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("0123456789"));
-        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("11 June,1995"));
+        $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("10 May,1990"));
         $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("Arts"));
         $(".table-responsive").$(byText("Hobbies")).parent().shouldHave(text("Music"));
         $(".table-responsive").$(byText("Picture")).parent().shouldHave(text("barselona-messi.jpg"));
         $(".table-responsive").$(byText("Address")).parent().shouldHave(text("New current address"));
-        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("Haryana Panipat"));
+        $(".table-responsive").$(byText("State and City")).parent().shouldHave(text("Haryana Karnal"));
     }
 }
