@@ -1,7 +1,7 @@
 package tests;
 
-import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.Test;
+import pages.RegistrationPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
@@ -9,47 +9,28 @@ import static com.codeborne.selenide.Selenide.*;
 import static tests.TestData.*;
 
 public class HomeWorkTests extends TestBase {
+    RegistrationPage registrationPage = new RegistrationPage();
 
     @Test
     void successfulFillFormTest() {
 
-        open("");
-        $$(".card-body").findBy(text("Forms")).click();
-        $$(".router-link").findBy(text("Practice Form")).click();
-
-        $("#firstName").setValue(firstName);
-        $("#lastName").setValue(secondName);
-
-        $("#userEmail").setValue(email);
-
-        $("#genterWrapper").$(byText(gender)).click();
-
-        $("#userNumber").setValue(phoneNumber);
-
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").$(byText(birthMonth)).click();
-        $(".react-datepicker__year-select").$(byText(birthYear)).click();
-        $(".react-datepicker__day--0" + day + ":not(.react-datepicker__day--outside-month)").click();
-
-
-        $("#subjectsInput").setValue(subject).pressEnter();
-
-        $("#hobbiesWrapper").$(byText(hobby)).click();
-
-        $("#uploadPicture").uploadFromClasspath(file);
-
-        $("#currentAddress").setValue(address);
-
-        $("#state").shouldBe(Condition.visible).click();
-        $("#state").$(byText(state)).shouldBe(Condition.visible).click();
-        $("#city").click();
-        $("#city").$(byText(city)).shouldBe(Condition.visible).click();
-
-        $("#submit").click();
+        registrationPage.openPage()
+                .typeFirstName(firstName)
+                .typeLastName(lastName)
+                .typeEmail(email)
+                .setGender(gender)
+                .typeNumber(phoneNumber)
+                .setDateOfBirth(day, birthMonth, birthYear)
+                .setSubjectsInput(subject)
+                .setHobby(hobby)
+                .uploadPicture(file)
+                .setCurrentAddressInput(address)
+                .setStateAndCity(state, city)
+                .clickSubmit();
 
         $(".modal-header").shouldHave(text("Thanks for submitting the form"));
 
-        $(".table-responsive").$(byText("Student Name")).parent().shouldBe(text(firstName + " " + secondName));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldBe(text(firstName + " " + lastName));
         $(".table-responsive").$(byText("Student Email")).parent().shouldBe(text(email));
         $(".table-responsive").$(byText("Gender")).parent().shouldBe(text(gender));
         $(".table-responsive").$(byText("Mobile")).parent().shouldBe(text(phoneNumber));

@@ -2,7 +2,7 @@ package tests;
 
 public class TestData {
     public static String firstName = "Petr";
-    public static String secondName = "Ivanov";
+    public static String lastName = "Ivanov";
     public static String email = "petrIvanov@mail.ru";
     public static String gender = "Male";
     public static String phoneNumber = "0123456789";
