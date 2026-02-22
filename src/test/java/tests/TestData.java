@@ -8,6 +8,7 @@ public class TestData {
     public static String phoneNumber = "0123456789";
     public static String birthMonth = "May";
     public static String birthYear = "1990";
+    public static String day = "10";
     public static String subject = "Arts";
     public static String hobby = "Music";
     public static String file = "barselona-messi.jpg";
