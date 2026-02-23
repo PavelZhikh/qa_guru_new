@@ -3,6 +3,7 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.CalendarComponent;
+import pages.components.CheckRegistrationPage;
 import pages.components.StateCityComponent;
 
 import static com.codeborne.selenide.Condition.text;
@@ -12,6 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class RegistrationPage {
     CalendarComponent calendar = new CalendarComponent();
     StateCityComponent stateCity = new StateCityComponent();
+    CheckRegistrationPage asserting = new CheckRegistrationPage();
 
     private SelenideElement firstNameInput = $("#firstName");
     private SelenideElement lastNameInput = $("#lastName");
@@ -53,7 +55,7 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setGender(String value) {
-        genderContainer.$(byText(value)).click();;
+        genderContainer.$(byText(value)).click();
 
         return this;
     }
@@ -102,8 +104,20 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage clickSubmit() {
-        submitClick.click();;
+    public RegistrationPage submitPage() {
+        submitClick.click();
+
+        return this;
+    }
+
+    public RegistrationPage checkPage(String value) {
+        asserting.checkModalHead(value);
+
+        return this;
+    }
+
+    public RegistrationPage checkPage(String key, String value) {
+        asserting.checkFields(key, value);
 
         return this;
     }

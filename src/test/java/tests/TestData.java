@@ -15,4 +15,5 @@ public class TestData {
     public static String address = "New current address";
     public static String state = "Haryana";
     public static String city = "Karnal";
+    public static String modalHeader = "Thanks for submitting the form";
 }
