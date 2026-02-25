@@ -29,7 +29,7 @@ public class HomeWorkTests extends TestBase {
                 .checkPage("Student Email", email)
                 .checkPage("Gender", gender)
                 .checkPage("Mobile", phoneNumber)
-                .checkPage("Date of Birth", "10 May,1990")
+                .checkPage("Date of Birth", day + " " + birthMonth + "," + birthYear)
                 .checkPage("Subjects", subject)
                 .checkPage("Hobbies", hobby)
                 .checkPage("Picture", file)
