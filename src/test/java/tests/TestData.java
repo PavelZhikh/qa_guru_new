@@ -2,7 +2,7 @@ package tests;
 
 public class TestData {
     public static String firstName = "Petr";
-    public static String secondName = "Ivanov";
+    public static String lastName = "Ivanov";
     public static String email = "petrIvanov@mail.ru";
     public static String gender = "Male";
     public static String phoneNumber = "0123456789";
@@ -15,4 +15,5 @@ public class TestData {
     public static String address = "New current address";
     public static String state = "Haryana";
     public static String city = "Karnal";
+    public static String modalHeader = "Thanks for submitting the form";
 }
