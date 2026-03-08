@@ -14,6 +14,8 @@ dependencies {
         testImplementation(platform("org.junit:junit-bom:5.10.0"))
         testImplementation("org.junit.jupiter:junit-jupiter")
         testImplementation("com.codeborne:selenide:7.14.0")
+        testImplementation("net.datafaker:datafaker:2.5.4")
+
     }
 }
 
