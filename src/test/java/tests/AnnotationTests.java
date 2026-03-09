@@ -18,18 +18,6 @@ public class AnnotationTests {
     @BeforeAll
     public static void setup() {
         Configuration.timeout = 70000;
-        // Явно указываем, что браузер должен использовать UTF-8
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("browserName", "chrome");
-        // Эта настройка помогает браузеру понять, что страница в UTF-8
-        capabilities.setCapability("acceptInsecureCerts", true); // пример
-        Configuration.browserCapabilities = capabilities;
-
-        // Устанавливаем кодировку для чтения ответов, если используете прокси Selenide
-        // (обычно это помогает при тестировании API через Selenide)
-        System.setProperty("file.encoding", "UTF-8");
-        // Для старых версий Java может потребоваться
-        java.nio.charset.Charset.defaultCharset().name();
     }
 
     @BeforeEach
@@ -42,10 +30,10 @@ public class AnnotationTests {
         closeWebDriver();
     }
 
-    @Test
+   @Test
     @Tag("Sports")
     @DisplayName("Тестирование аннотаций, поиск 'ЦСКА'")
-    void searchCska(){
+    void searchWithoutParameterizedParameters(){
 
         $(".navigation-search-btn").click();
         $(".navigation-search-popup__input").setValue("ЦСКА");
@@ -55,25 +43,36 @@ public class AnnotationTests {
     @ValueSource(strings = {
             "Спартак", "Динамо"
     })
-    @ParameterizedTest(name = "Тестирование аннотаций, поиск {0}")
+    @ParameterizedTest(name = "Тестирование @ValueSource, поиск {0}")
     @Tag("Sports")
-    void searchTeamUsingValueSource(String searchQuery){
+    void searchUsingValueSource(String searchQuery){
 
         $(".navigation-search-btn").click();
         $(".navigation-search-popup__input").setValue(searchQuery);
         $$(".navigation-search-results__list").shouldBe(sizeGreaterThan(0));
     }
 
-    /*@ValueSource(strings = {
-            "Зенит"
+    @CsvSource(value = {
+            "Зенит, Футбол",
+            "Локомотив, Хоккей"
     })
-    @ParameterizedTest(name = "Тестирование аннотаций, поиск {0}")
+    @ParameterizedTest(name = "Тестирование @CsvSource, поиск {0}, сравнение с {1}")
     @Tag("Sports")
-    void searchTeamUsingValueSourceZenit(String searchQuery){
+    void searchUsingCsvSource(String searchQuery, String expectedValue){
 
         $(".navigation-search-btn").click();
         $(".navigation-search-popup__input").setValue(searchQuery);
-        $(".navigation-search-results__item").shouldHave(text("/football/club/zenit/"));
-    }*/
+        $(".navigation-search-results__anchor").shouldHave(text(expectedValue));
+    }
+
+    @CsvFileSource(resources = "/test_data/searchUsingCsvFileSource.csv")
+    @ParameterizedTest(name = "Тестирование @CsvSource, поиск {0}, сравнение с {1}")
+    @Tag("Sports")
+    void searchUsingCsvFileSource(String searchQuery, String expectedValue){
+
+        $(".navigation-search-btn").click();
+        $(".navigation-search-popup__input").setValue(searchQuery);
+        $(".navigation-search-results__anchor").shouldHave(text(expectedValue));
+    }
 
 }
