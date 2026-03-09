@@ -5,9 +5,9 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.EnumSource;
+//import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.remote.DesiredCapabilities;
+//import org.openqa.selenium.remote.DesiredCapabilities;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.text;
@@ -17,7 +17,7 @@ public class AnnotationTests {
 
     @BeforeAll
     public static void setup() {
-        Configuration.timeout = 70000;
+        Configuration.timeout = 20000;
     }
 
     @BeforeEach
@@ -66,7 +66,7 @@ public class AnnotationTests {
     }
 
     @CsvFileSource(resources = "/test_data/searchUsingCsvFileSource.csv")
-    @ParameterizedTest(name = "Тестирование @CsvSource, поиск {0}, сравнение с {1}")
+    @ParameterizedTest(name = "Тестирование @CsvFileSource, поиск {0}, сравнение с {1}")
     @Tag("Sports")
     void searchUsingCsvFileSource(String searchQuery, String expectedValue){
 
