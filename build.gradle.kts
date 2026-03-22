@@ -20,6 +20,7 @@ dependencies {
         testImplementation("com.codeborne:xls-test:1.7.2")
         testImplementation("org.apache.poi:poi:5.2.3")
         testImplementation("com.opencsv:opencsv:5.10")
+        testImplementation("com.fasterxml.jackson.core:jackson-databind:2.13.1")
     }
 }
 

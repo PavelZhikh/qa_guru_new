@@ -1,0 +1,9 @@
+{
+  "id": "0001",
+  "type": "donut",
+  "batter":
+  {
+    "taste": "Regular",
+    "topping": "Chocolate"
+  }
+}
