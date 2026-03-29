@@ -13,7 +13,6 @@ import tests.model.FileJson;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -36,7 +35,7 @@ public class FileParsingTest {
                 System.out.println(entry.getName());
                 fileNames.add(entry.getName());
             }
-        return fileNames;
+            return fileNames;
         }
     }
 
@@ -44,17 +43,37 @@ public class FileParsingTest {
     @DisplayName("Чтение файла PDF")
     void pdfFileParsingTest() throws Exception {
 
-        PDF pdf = new PDF(URI.create("file:///C:/Users/Pavel/IdeaProjects/qa_guru_new/src/test/resources/" + zipFileParsingTest().get(0)));
-        Assertions.assertTrue(pdf.text.contains("распространенных"));
+        try (InputStream is = cl.getResourceAsStream("zip_test.zip");
+             ZipInputStream zis = new ZipInputStream(is)) {
+
+            ZipEntry entry;
+            while ((entry = zis.getNextEntry()) != null) {
+                if (entry.getName().endsWith(".pdf")) {
+                    PDF pdf = new PDF(zis);
+                    Assertions.assertTrue(pdf.text.contains("распространенных"));
+                    return;
+                }
+            }
+        }
     }
 
     @Test
     @DisplayName("Чтение файла XLSX")
     void xlsFileParsingTest() throws Exception {
 
-        XLS xls = new XLS(URI.create("file:///C:/Users/Pavel/IdeaProjects/qa_guru_new/src/test/resources/" + zipFileParsingTest().get(1)));
-        Row headerRow = xls.excel.getSheetAt(0).getRow(0);
-        Assertions.assertTrue(headerRow.getCell(0).getStringCellValue().contains("тест"));
+        try (InputStream is = cl.getResourceAsStream("zip_test.zip");
+             ZipInputStream zis = new ZipInputStream(is)) {
+
+            ZipEntry entry;
+            while ((entry = zis.getNextEntry()) != null) {
+                if (entry.getName().endsWith(".xlsx")) {
+                    XLS xls = new XLS(zis);
+                    Row headerRow = xls.excel.getSheetAt(0).getRow(0);
+                    Assertions.assertTrue(headerRow.getCell(0).getStringCellValue().contains("тест"));
+                    return;
+                }
+            }
+        }
     }
 
     @Test
