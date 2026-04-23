@@ -1,6 +1,6 @@
 plugins {
     id("java-library")
-    id("io.qameta.allure") version "2.9.6"
+    id("io.qameta.allure") version "2.11.2"
 }
 
 group = "com.jiharpv"
@@ -8,13 +8,13 @@ version = "1.0-SNAPSHOT"
 
 allure {
     report {
-        version.set("2.17.3") //версия Allure Report (https://github.com/allure-framework/allure2)
+        version.set("2.17.3")
     }
     adapter {
-        aspectjWeaver.set(true) // обработка аннотации @Step
+        aspectjWeaver.set(true)
         frameworks {
             junit5 {
-                adapterVersion.set("2.17.3") //версия Allure JUnit5 (https://github.com/allure-framework/allure-java)
+                adapterVersion.set("2.20.0")
             }
         }
     }
