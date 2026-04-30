@@ -1,9 +1,24 @@
 plugins {
     id("java-library")
+    id("io.qameta.allure") version "2.11.2"
 }
 
 group = "com.jiharpv"
 version = "1.0-SNAPSHOT"
+
+allure {
+    report {
+        version.set("2.17.3")
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.20.0")
+            }
+        }
+    }
+}
 
 repositories {
     mavenCentral()
@@ -23,6 +38,7 @@ dependencies {
         testImplementation("com.fasterxml.jackson.core:jackson-databind:2.13.1")
         testImplementation("io.rest-assured:rest-assured:6.0.0")
         testImplementation("io.rest-assured:json-schema-validator:6.0.0")
+        testImplementation("io.qameta.allure:allure-selenide:2.19.0")
     }
 }
 
