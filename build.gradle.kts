@@ -1,6 +1,6 @@
 plugins {
     id("java-library")
-    id("io.qameta.allure") version "2.11.2"
+    id("io.qameta.allure") version "2.12.0"
 }
 
 group = "com.jiharpv"
@@ -8,13 +8,13 @@ version = "1.0-SNAPSHOT"
 
 allure {
     report {
-        version.set("2.17.3")
+        version.set("2.32.0")
     }
     adapter {
         aspectjWeaver.set(true)
         frameworks {
             junit5 {
-                adapterVersion.set("2.20.0")
+                adapterVersion.set("2.32.0")
             }
         }
     }
@@ -26,7 +26,7 @@ repositories {
 
 dependencies {
     dependencies {
-        testImplementation(platform("org.junit:junit-bom:5.10.0"))
+        testImplementation(platform("org.junit:junit-bom:5.14.1"))
         testImplementation("org.junit.jupiter:junit-jupiter")
         testImplementation("com.codeborne:selenide:7.14.0")
 //        testImplementation("com.codeborne:selenide:7.0.1")
@@ -39,12 +39,33 @@ dependencies {
         testImplementation("io.rest-assured:rest-assured:6.0.0")
         testImplementation("io.rest-assured:json-schema-validator:6.0.0")
         testImplementation("io.qameta.allure:allure-selenide:2.19.0")
+        testImplementation("org.slf4j:slf4j-simple:2.0.17")
     }
 }
 
-tasks.test {
+/*tasks.test {
     useJUnitPlatform()
 
+}*/
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+
+    testLogging {
+        events("started", "skipped", "failed", "standard_error", "standard_out")
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.SHORT
+    }
 }
+
+/*tasks.withType(Test) {
+    useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}*/
 
 
