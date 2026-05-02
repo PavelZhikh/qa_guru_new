@@ -39,7 +39,7 @@ public class RegistrationWithPageObjectTests extends StepsTestBase {
             $("#submit").click();
         });
         step("Check registration form results data", () -> {
-            step("Check registration form results component appears", () -> { // or move to pageobject step
+            step("Check registration form results component appears", () -> {
                 $(".modal-dialog").should(appear);
                 $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
             });
@@ -65,7 +65,7 @@ public class RegistrationWithPageObjectTests extends StepsTestBase {
         });
 
         step("Check registration form results data", () -> {
-            step("Check registration form results component appears", () -> { // or move to pageobject step
+            step("Check registration form results component appears", () -> {
                 $(".modal-dialog").should(appear);
                 $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
             });
