@@ -25,7 +25,13 @@ public class StepsTestBase {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.baseUrl = "https://demoqa.com";
+        String baseUrlAddress = System.getProperty("");
+        System.out.println("Test baseUrl is: " + baseUrlAddress);
+
+        Configuration.baseUrl = baseUrlAddress;
+        Configuration.browser = "chrome";
+        Configuration.headless = false;
+//        Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
