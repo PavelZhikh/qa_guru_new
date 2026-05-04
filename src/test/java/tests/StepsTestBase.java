@@ -30,32 +30,35 @@ public class StepsTestBase {
         Boolean headlessFlag = Boolean.parseBoolean(System.getProperty("headlessFlag", "false"));
         String browserScreen = System.getProperty("browserScreen");
 
+        String loginSelenoid =  System.getProperty("loginSelenoid");
+        String passwordSelenoid =  System.getProperty("passwordSelenoid");
+        String urlSelenoid = System.getProperty("urlSelenoid");
+
         System.out.println("Test baseUrl is: " + baseUrlAddress);
         System.out.println("Test browser is: " + browserUsing);
         System.out.println("Test headless is: " + headlessFlag);
         System.out.println("Test browserSize is: " + browserScreen);
+        System.out.println("Test loginSelenoid is: " + loginSelenoid);
+        System.out.println("Test passwordSelenoid is: " + passwordSelenoid);
+        System.out.println("Test urlSelenoid is: " + urlSelenoid);
+
+
 
         Configuration.baseUrl = baseUrlAddress;
         Configuration.browser = browserUsing;
         Configuration.headless = headlessFlag;
         Configuration.browserSize = browserScreen;
 
-//        String baseUrlAddress = System.getProperty("");
-//        System.out.println("Test baseUrl is: " + baseUrlAddress);
-
-//        Configuration.baseUrl = baseUrlAddress;
-//        Configuration.browser = "chrome";
-//        Configuration.headless = false;
-//        Configuration.baseUrl = "https://demoqa.com";
-//        Configuration.browserSize = "1920x1080";
-
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
                 "enableVideo", true
         ));
+
         Configuration.browserCapabilities = capabilities;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+        Configuration.remote = "https://" + loginSelenoid + ":" + passwordSelenoid + "@" + urlSelenoid;
+
+//        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
 
     @AfterEach
